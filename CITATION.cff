@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "Pokud tento projekt citujete, uvádějte prosím tento záznam."
+title: "Kimi Antonelli — GRIDO1 Racing Systems"
+type: software
+authors:
+  - family-names: "Gorcica"
+    given-names: "Daniel"
+repository-code: "https://github.com/daniel-gorcica/kimi"
+url: "https://daniel-gorcica.github.io/kimi/"
+abstract: "Experimentální fanouškovský web vytvořený převážně pomocí umělé inteligence pro zábavu a experimentování. Autor Daniel Gorcica ho tvořil pro pobavení a některým technickým příkazům a částem implementace sám nemusí dokonale rozumět."
+keywords:
+  - artificial intelligence
+  - fan project
+  - Formula 1
+  - Kimi Antonelli
