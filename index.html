@@ -1499,10 +1499,6 @@
       stroke-width: 1;
     }
 
-    .globe * {
-      vector-effect: non-scaling-stroke;
-    }
-
     .badge-word {
       display: flex;
       gap: 0.3em;
@@ -2336,7 +2332,6 @@
       fill: none;
       stroke: var(--foreground-on-dark);
       stroke-width: 1;
-      vector-effect: non-scaling-stroke;
     }
 
     .cal-dot {
@@ -3642,7 +3637,7 @@
     <div class="standings">
       <svg class="standings-frame" viewBox="0 0 277 78" preserveAspectRatio="none" aria-hidden="true"><path d="M0.5 0.5H276.5V69L268 77.5H0.5Z" vector-effect="non-scaling-stroke"/><line x1="83" y1="0" x2="83" y2="78" vector-effect="non-scaling-stroke"/></svg>
       <div class="standings-badge">
-        <svg class="globe" viewBox="0 0 37 23" aria-hidden="true"><ellipse cx="18.5" cy="11.5" rx="18" ry="11"/><line x1="0.5" y1="11.5" x2="36.5" y2="11.5"/><ellipse class="globe-meridian" cx="18.5" cy="11.5" rx="18" ry="11"/></svg>
+        <svg class="globe" viewBox="0 0 37 23" aria-hidden="true"><ellipse cx="18.5" cy="11.5" rx="18" ry="11" vector-effect="non-scaling-stroke"/><line x1="0.5" y1="11.5" x2="36.5" y2="11.5" vector-effect="non-scaling-stroke"/><ellipse class="globe-meridian" cx="18.5" cy="11.5" rx="18" ry="11" vector-effect="non-scaling-stroke"/></svg>
         <p class="badge-word"><span class="badge-f1" data-letters>F1</span><span class="badge-year" data-letters>/ ${L.season}</span></p>
       </div>
       <dl class="standings-stats">
@@ -3727,7 +3722,7 @@
       <div class="cal-card ${c.mark === "live" ? "cal-live" : ""} ${i < 2 ? "cal-early" : ""}" style="left:calc(${spread(c.x + c.w / 2)} - ${px(c.w / 2)});--w:${px(c.w)}">
         <span class="cal-round">${c.round}</span><span class="cal-name">${c.name}</span><span class="cal-date">${c.date}</span>
       </div>
-      <div class="cal-mark" style="left:${spread(c.x + c.w / 2)}">${c.mark === "live" ? `<svg viewBox="0 0 11 11" overflow="visible"><circle class="cal-pulse" cx="5.5" cy="5.5" r="5.5" vector-effect="non-scaling-stroke"/><circle cx="5.5" cy="5.5" r="5.5" class="cal-dot"/></svg>` : c.mark === "ring" ? `<svg viewBox="0 0 11 11"><circle cx="5.5" cy="5.5" r="5" class="cal-ring"/></svg>` : `<span class="cal-result">${c.mark}</span>`}</div>`).join("")}
+      <div class="cal-mark" style="left:${spread(c.x + c.w / 2)}">${c.mark === "live" ? `<svg viewBox="0 0 11 11" overflow="visible"><circle class="cal-pulse" cx="5.5" cy="5.5" r="5.5" vector-effect="non-scaling-stroke"/><circle cx="5.5" cy="5.5" r="5.5" class="cal-dot"/></svg>` : c.mark === "ring" ? `<svg viewBox="0 0 11 11"><circle cx="5.5" cy="5.5" r="5" class="cal-ring" vector-effect="non-scaling-stroke"/></svg>` : `<span class="cal-result">${c.mark}</span>`}</div>`).join("")}
     <div class="cal-bracket" style="left:${spread(669)};width:calc(${spread(781)} - ${spread(669)})">${["tl", "tr", "br", "bl"].map((c) => `<span class="pb-c pb-${c}">${BRACKET}</span>`).join("")}</div>
   </div>
 </section>`;
