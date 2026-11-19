@@ -5,8 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kimi Antonelli — GRIDO1 Racing Systems</title>
+  <link rel="icon" href="./assets/images.png" type="image/png">
   <meta name="description"
-    content="Kimi Antonelli, driver_012 of GRIDO1 Racing Systems, in his rookie Mercedes-AMG F1 season.">
+    content="Kimi Antonelli, driver_012 of GRIDO1 Racing Systems, in his second Mercedes-AMG F1 season.">
   <script type="importmap">
 {
   "imports": {
@@ -988,50 +989,163 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: var(--k-background);
+      overflow: hidden;
+      background: var(--surface-black);
+      color: var(--foreground-on-dark);
       pointer-events: auto;
+      will-change: transform, opacity;
+    }
+
+    .veil::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at center, rgb(2 210 227 / 0.12), transparent 38%),
+        linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+      background-size: auto, 48px 48px, 48px 48px;
+      mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+    }
+
+    .veil::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -2px;
+      height: 1px;
+      background: var(--k-accent);
+      box-shadow: 0 0 16px var(--k-accent);
+      opacity: 0.65;
+      animation: veil-scan 3.2s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes veil-scan {
+      from { transform: translateY(-2px); }
+      to { transform: translateY(100vh); }
+    }
+
+    .veil-meta {
+      position: absolute;
+      top: 2rem;
+      left: 2.25rem;
+      right: 2.25rem;
+      display: flex;
+      justify-content: space-between;
+      color: var(--foreground-on-dark-muted);
+      font: 500 0.7rem/1 var(--font-sans);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
 
     .veil-content {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: min(90vw, 28rem);
+    }
+
+    .veil-kicker {
+      margin-bottom: 1rem;
+      color: var(--k-accent);
+      font: 500 0.7rem/1 var(--font-sans);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .veil-lights {
+      display: flex;
+      gap: 0.55rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .veil-lights i {
+      width: 0.48rem;
+      height: 0.48rem;
+      border-radius: 50%;
+      background: #ff3b30;
+      opacity: 0.18;
+      box-shadow: 0 0 0 transparent;
+      animation: veil-light 1.8s ease-in-out infinite;
+    }
+
+    .veil-lights i:nth-child(2) { animation-delay: 0.12s; }
+    .veil-lights i:nth-child(3) { animation-delay: 0.24s; }
+    .veil-lights i:nth-child(4) { animation-delay: 0.36s; }
+    .veil-lights i:nth-child(5) { animation-delay: 0.48s; }
+
+    @keyframes veil-light {
+      12%, 58% { opacity: 1; box-shadow: 0 0 14px rgb(255 59 48 / 0.7); }
+      0%, 72%, 100% { opacity: 0.18; box-shadow: 0 0 0 transparent; }
     }
 
     .veil-helmet {
       position: relative;
-      width: 7.2rem;
-      height: 8.5rem;
+      width: 8.5rem;
+      height: 9.5rem;
       mask-size: contain;
       mask-repeat: no-repeat;
       mask-position: center;
       -webkit-mask-size: contain;
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-position: center;
+      filter: drop-shadow(0 0 2rem rgb(2 210 227 / 0.16));
+      animation: veil-float 2.8s ease-in-out infinite;
+    }
+
+    @keyframes veil-float {
+      50% { transform: translateY(-0.35rem); }
     }
 
     .veil-shell {
       position: absolute;
       inset: 0;
-      background: var(--k-foreground);
-      opacity: 0.12;
+      background: var(--raw-color-white);
+      opacity: 0.15;
     }
 
     .veil-fill {
       position: absolute;
       inset: 0;
-      background: var(--k-foreground);
+      background: linear-gradient(to bottom, rgb(2 210 227 / 0.35), var(--k-accent) 35%, var(--k-accent));
       transform-origin: top;
       transform: scaleY(0);
     }
 
     .veil-name {
-      margin-top: 1.75rem;
-      font-size: var(--type-lead);
+      margin-top: 1.3rem;
+      color: var(--foreground-on-dark);
+      font: 700 var(--type-display)/0.9 var(--font-display);
       text-transform: uppercase;
-      line-height: 0.9;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.04em;
       opacity: 0;
+    }
+
+    .veil-status {
+      margin-top: 0.8rem;
+      color: var(--foreground-on-dark-muted);
+      font: 500 0.68rem/1 var(--font-sans);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .veil-status::after {
+      content: "";
+      display: inline-block;
+      width: 1.2rem;
+      animation: veil-dots 1.2s steps(4, end) infinite;
+    }
+
+    @keyframes veil-dots {
+      0% { content: ""; }
+      25% { content: "."; }
+      50% { content: ".."; }
+      75%, 100% { content: "..."; }
     }
 
     .veil-meter {
@@ -1039,16 +1153,20 @@
       left: 0;
       right: 0;
       bottom: 0;
-      height: 4px;
-      background: var(--border-muted);
+      height: 3px;
+      background: rgb(255 255 255 / 0.12);
     }
 
     .veil-meter-fill {
       position: absolute;
       inset: 0;
-      background: var(--k-foreground);
+      background: var(--k-accent);
+      box-shadow: 0 0 12px rgb(2 210 227 / 0.8);
       transform-origin: left;
       transform: scaleX(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .veil::after, .veil-lights i, .veil-helmet, .veil-status::after { animation: none; }
     }
 
     /* The menu sheet */
@@ -1258,6 +1376,9 @@
       height: 809.11px;
     }
 
+    .season-circuit-image { display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:contain; transform:scale(0.72); transform-origin:center; filter:invert(1) sepia(1) saturate(5) hue-rotate(135deg); }
+    .season-frame.has-dynamic-circuit .season-circuit-image { display:block; }
+    .season-frame.has-dynamic-circuit .season-dots, .season-frame.has-dynamic-circuit .season-svg, .season-frame.has-dynamic-circuit .season-trace { display:none; }
     .season-dots,
     .season-svg {
       position: absolute;
@@ -1274,6 +1395,10 @@
       height: 800px;
     }
 
+    .season-next { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.3rem; text-transform: uppercase; }
+    .season-next span { color: var(--k-accent); font-size: var(--type-eyebrow); }
+    .season-next strong { font: 700 var(--type-title)/1 var(--font-display); }
+    .season-next small { color: var(--foreground-on-dark-muted); font-size: var(--type-body); }
     .season-copy {
       position: relative;
       z-index: 20;
@@ -3351,17 +3476,92 @@
       ["next race", "#next-race"],
       ["store", "https://shop-int.mercedesamgf1.com/"]
     ];
+
+    // Live data: refreshed from the Jolpica F1 API on each page load; values below are the fallback.
+    var L = {
+      season: "2026", races: 20, podiums: 16, points: 390, pos: 1, wins: 9,
+      next: { name: "las vegas gp", circuit: "las vegas strip circuit", iso: "2026-11-21", long: "21 nov 2026" },
+      last: { name: "são paulo gp", circuit: "interlagos", us: "november 8, 2026", pos: "5", pts: "10" },
+      report: "A difficult weekend in São Paulo still brought points — and Kimi stays clearly at the top of the championship.",
+      cal: [
+        { round: "round 19", name: "mexico city gp", date: "01 nov", mark: "p3" },
+        { round: "round 20", name: "são paulo gp", date: "08 nov", mark: "p5" },
+        { round: "round 21", name: "las vegas gp", date: "21 nov", mark: "live" },
+        { round: "round 22", name: "qatar gp", date: "29 nov", mark: "ring" },
+        { round: "round 23", name: "abu dhabi gp", date: "06 dec", mark: "ring" }
+      ]
+    };
+    var loadLive = async () => {
+      const api = "https://api.jolpi.ca/ergast/f1/current";
+      const get = (p) => fetch(api + p).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+      const [st, res, sch, meetings] = await Promise.all([
+        get("/drivers/antonelli/driverStandings.json"),
+        get("/drivers/antonelli/results.json?limit=100"),
+        get(".json?limit=100"),
+        fetch("https://api.openf1.org/v1/meetings?year=" + new Date().getUTCFullYear(), { signal: AbortSignal.timeout(2500) }).then((r) => r.ok ? r.json() : []).catch(() => [])
+      ]);
+      const ds = st.MRData.StandingsTable.StandingsLists[0].DriverStandings[0];
+      const done = res.MRData.RaceTable.Races;
+      const all = sch.MRData.RaceTable.Races;
+      const M = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+      const MF = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+      const d = (s) => new Date(s + "T12:00:00Z");
+      const short = (s) => String(d(s).getUTCDate()).padStart(2, "0") + " " + M[d(s).getUTCMonth()];
+      const gp = (n) => n.replace(/ Grand Prix$/i, " gp").toLowerCase();
+      const circ = (c) => c.Location.locality.toLowerCase();
+      const byRound = Object.fromEntries(done.map((r) => [r.round, r]));
+      const podiums = done.filter((r) => +r.Results[0].position <= 3).length;
+      const lastRace = done[done.length - 1];
+      const lr = lastRace.Results[0];
+      const nextIdx = all.findIndex((r) => !byRound[r.round]);
+      const center = nextIdx === -1 ? all.length - 1 : nextIdx;
+      let start = Math.max(0, Math.min(center - 2, all.length - 5));
+      const cal = all.slice(start, start + 5).map((r) => {
+        const res = byRound[r.round];
+        const mark = res ? "p" + (isNaN(+res.Results[0].position) ? "-" : res.Results[0].position) : r === all[nextIdx] ? "live" : "ring";
+        return { round: "round " + r.round, name: gp(r.raceName), date: short(r.date), mark };
+      });
+      const nx = all[nextIdx] || all[all.length - 1];
+      const raceTime = d(nx.date).getTime();
+      const meeting = meetings.reduce((best, item) => {
+        const start = new Date(item.date_start).getTime();
+        const end = new Date(item.date_end).getTime();
+        const distance = Math.max(start - raceTime, raceTime - end, 0);
+        return !best || distance < best.distance ? { item, distance } : best;
+      }, null);
+      if (meeting?.distance < 3 * 24 * 60 * 60 * 1000 && meeting.item.circuit_image)
+        nx.circuitImage = meeting.item.circuit_image;
+      const p = +lr.position;
+      const lead = +ds.position === 1 ? "and Kimi stays at the top of the championship." : "and Kimi sits P" + ds.position + " in the championship.";
+      const where = lastRace.Circuit.Location.locality;
+      const report = p === 1 ? "Victory in " + where + " — " + lead
+        : p <= 3 ? "Another podium in " + where + " — " + lead
+          : +lr.points > 0 ? "A hard-fought weekend in " + where + " still brought points — " + lead
+            : "A difficult weekend in " + where + " — " + lead;
+      const ld = d(lastRace.date);
+      Object.assign(L, {
+        season: st.MRData.StandingsTable.season, races: done.length, podiums,
+        points: +ds.points, pos: ds.position, wins: ds.wins,
+        next: { name: gp(nx.raceName), circuit: nx.Circuit.circuitName.toLowerCase(), iso: nx.date, long: short(nx.date) + " " + d(nx.date).getUTCFullYear(), circuitImage: nx.circuitImage },
+        last: { name: gp(lastRace.raceName), circuit: circ(lastRace.Circuit), us: MF[ld.getUTCMonth()] + " " + ld.getUTCDate() + ", " + ld.getUTCFullYear(), pos: isNaN(p) ? "-" : String(p), pts: lr.points },
+        report, cal
+      });
+    };
     var hero = () => `
 <section class="hero" id="hero" data-hero>
   <div class="hero-canvas"><canvas aria-hidden="true"></canvas></div>
   <div class="hero-figure" aria-hidden="true"><div class="hero-fit" data-fit></div><div class="hero-figure-ramp"></div></div>
   <div class="hero-ramp" aria-hidden="true"></div>
   <div class="veil" role="status" aria-label="Loading Grido1 Racing Systems">
-    <div class="veil-content">
+    <div class="veil-meta" aria-hidden="true"><span>GRIDO1 / RACING SYSTEMS</span><span>DRIVER_012 / ${L.season}</span></div>
+  <div class="veil-content">
+    <p class="veil-kicker">Race systems initializing</p>
+    <div class="veil-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
       <div class="veil-helmet" style="mask-image:url(${asset("hero/ui/helmet-mask.png")});-webkit-mask-image:url(${asset("hero/ui/helmet-mask.png")})">
         <div class="veil-shell"></div><div class="veil-fill"></div>
       </div>
       <p class="veil-name">kimi antonelli</p>
+      <p class="veil-status">Loading telemetry</p>
     </div>
     <div class="veil-meter"><div class="veil-meter-fill"></div></div>
   </div>
@@ -3380,7 +3580,7 @@
         </div>
         <ul class="meta">
           <li data-meta><img src="${asset("hero/ui/flag-italy.webp")}" alt="Italy" class="meta-flag"><span>Italy</span></li>
-          <li data-meta><img src="${asset("hero/ui/icon-rookie.svg")}" alt="" class="meta-rookie"><span>rookie season_2026</span></li>
+          <li data-meta><img src="${asset("hero/ui/icon-rookie.svg")}" alt="" class="meta-rookie"><span>season_${L.season}</span></li>
           <li data-meta><img src="${asset("hero/ui/mercedes-logo.webp")}" alt="" class="meta-merc"><span>Mercedes-AMG F1 Team</span></li>
         </ul>
       </div>
@@ -3389,17 +3589,17 @@
           ${corners()}
           <p class="eyebrow">next race</p>
           <div class="race-row">
-            <dl class="race-list"><dt>belgian gp</dt><dd>spa-francorchamps</dd><dd><time datetime="2026-07-27">27 jul 2026</time></dd></dl>
-            <img src="${asset("hero/ui/circuit-spa.webp")}" alt="Spa-Francorchamps circuit layout" class="race-map" data-hero-map>
+            <dl class="race-list"><dt>${L.next.name}</dt><dd>${L.next.circuit}</dd><dd><time datetime="${L.next.iso}">${L.next.long}</time></dd></dl>
+            <img src="${asset("hero/ui/circuit-spa.webp")}" alt="Las Vegas Strip Circuit layout" class="race-map" data-hero-map>
           </div>
         </div>
         <div class="bpanel">
           ${corners()}
           <p class="eyebrow">Season stats</p>
           <dl class="hero-stats" data-hero-stats>
-            <div><dt>Races</dt><dd data-stat>12</dd></div>
-            <div><dt>Podiums</dt><dd data-stat>3</dd></div>
-            <div><dt>Points</dt><dd data-stat>118</dd></div>
+            <div><dt>Races</dt><dd data-stat>${L.races}</dd></div>
+            <div><dt>Podiums</dt><dd data-stat>${L.podiums}</dd></div>
+            <div><dt>Points</dt><dd data-stat>${L.points}</dd></div>
           </dl>
         </div>
       </div>
@@ -3424,6 +3624,7 @@
   <div class="season-frame" aria-hidden="true">
     <div class="season-stage">
       <div class="season-map">
+        ${L.next.circuitImage ? `<img class="season-circuit-image" src="${L.next.circuitImage}" alt="" loading="eager">` : ""}
         <canvas class="season-dots"></canvas>
         <svg class="season-svg" viewBox="0 0 2560 1440" overflow="visible" aria-hidden="true"></svg>
       </div>
@@ -3436,23 +3637,24 @@
       <h2 class="season-head"><span class="k-sr">the season so far.</span><span class="head-line" aria-hidden="true" data-line>the season</span><span class="head-line" aria-hidden="true"><span data-line>so far</span><span class="head-stop" data-stop>.</span></span></h2>
       <div class="season-rule"></div>
       <p class="season-intro">Every race is a step forward. Here's how the season is shaping up.</p>
+      <p class="season-next"><span>next circuit</span><strong>${L.next.name}</strong><small>${L.next.circuit}</small></p>
     </div>
     <div class="standings">
       <svg class="standings-frame" viewBox="0 0 277 78" preserveAspectRatio="none" aria-hidden="true"><path d="M0.5 0.5H276.5V69L268 77.5H0.5Z" vector-effect="non-scaling-stroke"/><line x1="83" y1="0" x2="83" y2="78" vector-effect="non-scaling-stroke"/></svg>
       <div class="standings-badge">
         <svg class="globe" viewBox="0 0 37 23" aria-hidden="true"><ellipse cx="18.5" cy="11.5" rx="18" ry="11"/><line x1="0.5" y1="11.5" x2="36.5" y2="11.5"/><ellipse class="globe-meridian" cx="18.5" cy="11.5" rx="18" ry="11"/></svg>
-        <p class="badge-word"><span class="badge-f1" data-letters>F1</span><span class="badge-year" data-letters>/ 2026</span></p>
+        <p class="badge-word"><span class="badge-f1" data-letters>F1</span><span class="badge-year" data-letters>/ ${L.season}</span></p>
       </div>
       <dl class="standings-stats">
-        <div><dt data-letters>P1</dt><dd data-letters>in the championship</dd></div>
-        <div><dt data-letters>6</dt><dd data-letters>wins</dd></div>
-        <div><dt data-letters>9</dt><dd data-letters>podiums.</dd></div>
+        <div><dt data-letters>P${L.pos}</dt><dd data-letters>in the championship</dd></div>
+        <div><dt data-letters>${L.wins}</dt><dd data-letters>wins</dd></div>
+        <div><dt data-letters>${L.podiums}</dt><dd data-letters>podiums.</dd></div>
       </dl>
     </div>
   </div>
 </section>`;
     var TIMELINE = [
-      { year: "2012", frame: "centre", align: null, lead: "The first kart.", rest: "At six, Kimi discovered karting — turning a childhood curiosity into something of his own.", copyWidth: 228, alt: "Kimi in kart overalls in the paddock, aged six" },
+      { year: "2014", image: "assets/2014.webp", frame: "centre", align: null, lead: "The first kart.", rest: "At seven, Kimi discovered karting — turning a childhood curiosity into something of his own.", copyWidth: 228, alt: "Kimi in kart overalls in the paddock, aged seven" },
       { year: "2015", frame: "side", align: "right", alt: "Kimi holding a karting trophy at sunset" },
       { year: "2019", frame: "centre", align: null, lead: "Finding his people.", rest: "Kimi joined the Mercedes Junior Programme, marking his first major step into professional motorsport.", copyWidth: 272, alt: "Kimi signing with the Mercedes junior team" },
       { year: "2021", frame: "side", align: "left", alt: "Kimi beside a single-seater in the garage" },
@@ -3471,7 +3673,7 @@
     <div class="tl-row tl-${e.frame} ${e.align ? `tl-${e.align}` : ""} ${i % 2 ? "tl-odd" : "tl-even"}" data-row style="--row-h:${px(e.frame === "centre" ? 462 : 217)}">
       <div class="tl-layer tl-plate-layer" data-travel="${e.frame === "centre" ? 20 : 60}">
         <div class="tl-plate" style="--plate-w:${px(e.frame === "centre" ? 710 : 333)}">
-          <div class="tl-fill"><div class="tl-slot"><img src="${asset(`timeline/${e.year}.webp`)}" alt="${e.alt}" loading="lazy" crossorigin="anonymous"></div></div>
+          <div class="tl-fill"><div class="tl-slot"><img src="${e.image || asset(`timeline/${e.year}.webp`)}" alt="${e.alt}" loading="lazy" crossorigin="anonymous"></div></div>
           <svg class="tl-outline" viewBox="0 0 710.995 462.995" preserveAspectRatio="none" aria-hidden="true"><path d="${PLATE_OUTLINE}" vector-effect="non-scaling-stroke"/></svg>
         </div>
       </div>
@@ -3481,18 +3683,13 @@
   </div>
 </section>`;
     var STATS = [
-      ["flag", "last result", "P4"],
-      ["bars", "points gained", "+12"],
-      ["trophy", "championship", "P1"],
-      ["gauge", "points", "118"]
+      ["flag", "last result", "P" + L.last.pos],
+      ["bars", "points gained", "+" + L.last.pts],
+      ["trophy", "championship", "P" + L.pos],
+      ["gauge", "points", String(L.points)]
     ];
-    var CALENDAR = [
-      { round: "round 11", name: "austrian gp", date: "29 jun", x: 347, w: 100, mark: "p6" },
-      { round: "round 12", name: "british gp", date: "12 jul", x: 511, w: 100, mark: "p4" },
-      { round: "round 13", name: "belgian gp", date: "27 jul", x: 675, w: 100, mark: "live" },
-      { round: "round 14", name: "hungarian gp", date: "03 aug", x: 839, w: 114, mark: "ring" },
-      { round: "round 15", name: "dutch gp", date: "31 aug", x: 1017, w: 76, mark: "ring" }
-    ];
+    var CAL_X = [[347, 100], [511, 100], [675, 100], [839, 114], [1017, 76]];
+    var CALENDAR = L.cal.map((c, k) => ({ ...c, x: CAL_X[k][0], w: CAL_X[k][1] }));
     var LINKS = [
       { x: 416, w: 126, dir: 1 },
       { x: 580, w: 128, dir: 1 },
@@ -3510,7 +3707,7 @@
   <canvas class="chequer chequer-paddock" data-carry="dark" aria-hidden="true"></canvas>
   <h2 class="pd-head"><span class="k-sr">from the paddock.</span><span class="head-line" aria-hidden="true" data-line>from the</span><span class="head-line" aria-hidden="true"><span data-line>paddock</span><span class="head-stop" data-stop>.</span></span></h2>
   <div class="pd-intro">
-    <p class="pd-report">A composed drive through a difficult weekend secured another podium — and kept Kimi at the top of the championship.</p>
+    <p class="pd-report">${L.report}</p>
     <a class="pd-cta k-chamfer" href="https://www.formula1.com/en/latest/article/norris-beats-verstappen-and-antonelli-to-victoria-in-dramatic-hungarian-gp.5JQmohRAKABD2asRsMWogj" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 217 50" preserveAspectRatio="none" aria-hidden="true"><path class="ch-body" d="M0.5 0.5H216.5V42L209 49.5H0.5Z" vector-effect="non-scaling-stroke"/><path class="ch-flood" d="M0.5 0.5H216.5V42L209 49.5H0.5Z"/><path class="ch-ring" d="M0.5 0.5H216.5V42L209 49.5H0.5Z" vector-effect="non-scaling-stroke"/></svg>
       <span class="ch-label">read story<svg class="ch-arrow" viewBox="0 0 13.7071 10.7071" fill="none" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 0.35" stroke="currentColor"/></svg></span>
@@ -3518,7 +3715,7 @@
   </div>
   <div class="pd-panels">
     ${pbrackets("pb-meet")}
-    <div class="pd-meet"><b>hungarian gp</b><span>silverstone</span><span>july 12, 2026</span></div>
+    <div class="pd-meet"><b>${L.last.name}</b><span>${L.last.circuit}</span><span>${L.last.us}</span></div>
     ${pbrackets("pb-stats")}
     <dl class="pd-stats">
       ${STATS.map(([icon, label, fig], i) => `${i ? `<div class="pd-rule" data-rule></div>` : ""}<div class="pd-stat" data-statrow><img src="${asset(`paddock/icon-${icon}.svg`)}" alt=""><div><dt>${label}</dt><dd data-fig>${fig}</dd></div></div>`).join("")}
@@ -4815,6 +5012,7 @@ vRevealClip = gl_Position;`);
       });
       const lift = new Spring(CFG.VEIL, 1, (v) => {
         veil.style.opacity = `${clamp01(v)}`;
+        veil.style.transform = `translateY(${(1 - clamp01(v)) * -100}%)`;
       });
       cleanups.push(() => [progress, nameSpring, clear, lift].forEach((s) => s.dispose()));
       let scene = null;
@@ -6448,15 +6646,31 @@ vRevealClip = gl_Position;`);
         const w = frame.clientWidth;
         const h = frame.clientHeight;
         if (w >= 1024) {
-          const s = Math.max(w / 1440, h / 800);
+          const s = Math.max(w / 1440, h / 800) * 0.82;
           stage.style.transform = `translate(${(w - 1440 * s) / 2}px, ${(h - 800 * s) / 2}px) scale(${s})`;
+        } else if (frame.classList.contains("has-dynamic-circuit")) {
+          const s = w / 1440 * 0.82;
+          stage.style.transform = `translate(0, ${(h - 800 * s) / 2}px) scale(${s})`;
         } else {
-          const s = w / TRACK_BOX.width;
+          const s = w / TRACK_BOX.width * 0.82;
           const cx = TRACK_BOX.x + TRACK_BOX.width / 2;
           const cy = TRACK_BOX.y + TRACK_BOX.height / 2;
           stage.style.transform = `translate(${w / 2 - cx * s}px, ${h / 2 - cy * s}px) scale(${s})`;
         }
       };
+      const circuitImage = section.querySelector(".season-circuit-image");
+      const useCircuitImage = () => {
+        if (!circuitImage?.naturalWidth)
+          return;
+        frame.classList.add("has-dynamic-circuit");
+        fit();
+      };
+      if (circuitImage) {
+        circuitImage.addEventListener("load", useCircuitImage);
+        cleanups.push(() => circuitImage.removeEventListener("load", useCircuitImage));
+        if (circuitImage.complete)
+          useCircuitImage();
+      }
       const accent = readRgb("--k-accent");
       const white = [255, 255, 255];
       const palette = { accent, white, bright: mix(accent, white, 0.55) };
@@ -7137,13 +7351,22 @@ vRevealClip = gl_Position;`);
 
     // src/kimi/footer.ts
     init_engine();
-    var mountFooter = (root) => {
+    var mountFooter = (root, lenis) => {
       const section = root.querySelector("[data-footer]");
       const cleanups = [];
       const backToTop = root.querySelector("[data-back-top]");
       const onScroll = () => {
         backToTop?.classList.toggle("is-visible", window.scrollY > Math.max(500, window.innerHeight * 0.75));
       };
+      const onBackTop = (event) => {
+        event.preventDefault();
+        if (lenis)
+          lenis.scrollTo(0, { duration: 1.1 });
+        else
+          window.scrollTo({ top: 0, behavior: reducedMotion() ? "auto" : "smooth" });
+      };
+      backToTop?.addEventListener("click", onBackTop);
+      cleanups.push(() => backToTop?.removeEventListener("click", onBackTop));
       onScroll();
       window.addEventListener("scroll", onScroll, { passive: true });
       cleanups.push(() => window.removeEventListener("scroll", onScroll));
@@ -7237,7 +7460,7 @@ vRevealClip = gl_Position;`);
       cleanups.push(mountTimeline(root));
       cleanups.push(mountMachine(root));
       cleanups.push(mountPaddock(root));
-      cleanups.push(mountFooter(root));
+      cleanups.push(mountFooter(root, lenis));
       root.querySelectorAll("canvas.chequer").forEach((c) => cleanups.push(mountChequer(c)));
       root.querySelectorAll("canvas.contours").forEach((c) => cleanups.push(mountContours(c)));
       return () => {
@@ -7254,7 +7477,9 @@ vRevealClip = gl_Position;`);
     };
 
     // src/kimi/standalone.ts
-    mount(document.getElementById("app"));
+    Promise.race([loadLive(), new Promise((_, r) => setTimeout(() => r(new Error("timeout")), 5000))])
+      .catch((e) => console.warn("Live F1 data unavailable, using saved values:", e))
+      .finally(() => mount(document.getElementById("app")));
 
   </script>
 </body>
